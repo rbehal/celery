@@ -136,6 +136,7 @@ Celery is…
         - **Concurrency**
 
             - prefork (multiprocessing),
+            - spawn (multiprocessing spawn),
             - Eventlet_, gevent_
             - thread (multithreaded)
             - `solo` (single threaded)

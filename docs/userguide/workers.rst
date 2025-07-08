@@ -416,7 +416,7 @@ Remote control
     commands from the command-line. It supports all of the commands
     listed below. See :ref:`monitoring-control` for more information.
 
-:pool support: *prefork, eventlet, gevent, thread*, blocking:*solo* (see note)
+:pool support: *prefork, spawn, eventlet, gevent, thread*, blocking:*solo* (see note)
 :broker support: *amqp, redis*
 
 Workers have the ability to be remote controlled using a high-priority
@@ -496,7 +496,7 @@ Commands
 
 ``revoke``: Revoking tasks
 --------------------------
-:pool support: all, terminate only supported by prefork, eventlet and gevent
+:pool support: all, terminate only supported by prefork, spawn, eventlet and gevent
 :broker support: *amqp, redis*
 :command: :program:`celery -A proj control revoke <task_id>`
 
@@ -617,7 +617,7 @@ at this point.
 
 ``revoke_by_stamped_headers``: Revoking tasks by their stamped headers
 ----------------------------------------------------------------------
-:pool support: all, terminate only supported by prefork and eventlet
+:pool support: all, terminate only supported by prefork, spawn and eventlet
 :broker support: *amqp, redis*
 :command: :program:`celery -A proj control revoke_by_stamped_headers <header=value>`
 
@@ -685,7 +685,7 @@ Time Limits
 
 .. versionadded:: 2.0
 
-:pool support: *prefork/gevent (see note below)*
+:pool support: *prefork/spawn/gevent (see note below)*
 
 .. sidebar:: Soft, or hard?
 
@@ -792,7 +792,7 @@ Max tasks per child setting
 
 .. versionadded:: 2.0
 
-:pool support: *prefork*
+:pool support: *prefork/spawn*
 
 With this option you can configure the maximum number of tasks
 a worker can execute before it's replaced by a new process.
@@ -811,7 +811,7 @@ Max memory per child setting
 
 .. versionadded:: 4.0
 
-:pool support: *prefork*
+:pool support: *prefork/spawn*
 
 With this option you can configure the maximum amount of resident
 memory a worker can execute before it's replaced by a new process.
@@ -830,7 +830,7 @@ Autoscaling
 
 .. versionadded:: 2.2
 
-:pool support: *prefork*, *gevent*
+:pool support: *prefork/spawn*, *gevent*
 
 The *autoscaler* component is used to dynamically resize the pool
 based on load:
