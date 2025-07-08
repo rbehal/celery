@@ -20,6 +20,8 @@ Overview of Concurrency Options
 
 - `prefork`: The default option, ideal for CPU-bound tasks and most use cases.
   It is robust and recommended unless there's a specific need for another model.
+- `spawn`: Uses the "spawn" start method to create new processes. This is
+  helpful when working with libraries that are not fork-safe.
 - `eventlet` and `gevent`: Designed for IO-bound tasks, these models use
   greenlets for high concurrency. Note that certain features, like `soft_timeout`,
   are not available in these modes.  These have detailed documentation pages

@@ -3731,6 +3731,8 @@ Custom Component Classes (advanced)
 ~~~~~~~~~~~~~~~
 
 Default: ``"prefork"`` (``celery.concurrency.prefork:TaskPool``).
+Another built-in option is ``"spawn"`` which creates child processes using the
+``spawn`` start method.
 
 Name of the pool class used by the worker.
 
