@@ -14,9 +14,6 @@ class TaskPool(PreforkTaskPool):
     start_method = "spawn"
 
     def on_start(self):
-        try:
-            billiard.set_start_method(self.start_method, force=True)
-        except RuntimeError:
-            pass
+        billiard.set_start_method(self.start_method, force=True)
         os.environ.setdefault("FORKED_BY_MULTIPROCESSING", "1")
         super().on_start()
