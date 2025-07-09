@@ -1,7 +1,6 @@
 import os
 from unittest.mock import Mock, patch
 
-
 from celery.concurrency import spawn
 
 
@@ -76,4 +75,3 @@ class test_spawn_TaskPool:
             # Verify the pool was created
             assert pool._pool is not None
             assert pool._pool.started
-
