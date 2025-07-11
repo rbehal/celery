@@ -3140,6 +3140,9 @@ early acknowledgments, enable :setting:`worker_disable_prefetch`.
 When this option is enabled the worker only fetches a task from the broker
 when one of its processes is available.
 
+You can also enable this via the :option:`--disable-prefetch <celery worker --disable-prefetch>`
+command line flag.
+
 For more on prefetching, read :ref:`optimizing-prefetch-limit`
 
 .. note::
