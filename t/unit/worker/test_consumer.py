@@ -1004,6 +1004,37 @@ class test_Tasks:
             assert len(args) == 2  # callback and initial_value
             assert kwargs.get('max_prefetch') == 0
 
+    def test_ready_worker_limit_caps_at_ready_workers(self):
+        # Concurrency 3 but only 2 workers have completed the WORKER_UP
+        # handshake (one recycling), so the limit is capped at 2.
+        c = self.c
+        c.controller.max_concurrency = 3
+        c.pool._pool._fileno_to_inq = {10: 'w1', 11: 'w2'}
+        assert Tasks.ready_worker_limit(c) == 2
+
+    def test_ready_worker_limit_full_when_all_ready(self):
+        c = self.c
+        c.controller.max_concurrency = 3
+        c.pool._pool._fileno_to_inq = {10: 'w1', 11: 'w2', 12: 'w3'}
+        assert Tasks.ready_worker_limit(c) == 3
+
+    def test_ready_worker_limit_without_prefork_pool(self):
+        # Pools without _fileno_to_inq (solo/eventlet/gevent) keep the prior
+        # behaviour: the configured concurrency.
+        c = self.c
+        c.controller.max_concurrency = None
+        c.pool.num_processes = 3
+        c.pool._pool = object()
+        assert Tasks.ready_worker_limit(c) == 3
+
+    def test_ready_worker_limit_falls_back_on_introspection_error(self):
+        # If reading the ready set raises, fall back to configured concurrency
+        # rather than breaking can_consume (purely additive).
+        c = self.c
+        c.controller.max_concurrency = 3
+        c.pool._pool._fileno_to_inq = object()  # len() raises
+        assert Tasks.ready_worker_limit(c) == 3
+
 
 class test_Agent:
 

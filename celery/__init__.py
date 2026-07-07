@@ -24,10 +24,10 @@ _original_os_write = os.write
 
 SERIES = 'recovery'
 
-__version__ = '5.6.3'
-__author__ = 'Ask Solem'
-__contact__ = 'auvipy@gmail.com'
-__homepage__ = 'https://docs.celeryq.dev/'
+__version__ = '5.6.3+gumloop_0.2.0'
+__author__ = 'Rahul Behal'
+__contact__ = 'rahul@gumloop.com'
+__homepage__ = 'https://github.com/gumloop/gumloop-celery'
 __docformat__ = 'restructuredtext'
 __keywords__ = 'task job queue distributed messaging actor'
 
